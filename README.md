@@ -1,7 +1,7 @@
 # Unscented Kalman Filter Project
 Self-Driving Car Engineer Nanodegree Program.
 
-In this project an Unscented Kalman Filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. 
+In this project I've used an Unscented Kalman Filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. 
 
 This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases).
 
@@ -40,7 +40,7 @@ Tips for setting up your environment can be found [here](https://classroom.udaci
    * On Windows, you may need to run: `cmake .. -G "Unix Makefiles" && make`
 4. Run it: `./ExtendedKF `
 
-## Tuning and Testing Results
+## Tuning and Test Results
 
 After initial Unscented Kalman Filter implementation it did not perform too well. I had to tune standard deviation of longitudinal and yaw acceleration noise as well as initial values for covariance matrix. Here are the final values I ended up using:
 
