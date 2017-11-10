@@ -15,6 +15,7 @@ public:
 
   ///* initially set to false, set to true in first call of ProcessMeasurement
   bool is_initialized_;
+  long previous_timestamp_;
 
   ///* if this is false, laser measurements will be ignored (except for init)
   bool use_laser_;
@@ -28,8 +29,23 @@ public:
   ///* state covariance matrix
   MatrixXd P_;
 
+  // augmented mean vector and state covariance matrix
+  VectorXd x_aug_;
+  MatrixXd P_aug_;
+
+
+  // Sigma points
+  MatrixXd Xsig_aug_;
   ///* predicted sigma points matrix
   MatrixXd Xsig_pred_;
+
+  MatrixXd Zsig_;
+
+  MatrixXd H_;
+  MatrixXd R_laser_, R_radar_;
+
+  VectorXd z_pred_;
+  MatrixXd S_;
 
   ///* time when the state is true, in us
   long long time_us_;
@@ -60,6 +76,9 @@ public:
 
   ///* State dimension
   int n_x_;
+
+  // Radar dimension
+  int n_z_;
 
   ///* Augmented state dimension
   int n_aug_;
@@ -102,6 +121,13 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+private:
+  void CreateSigmaPoints();
+  void PredictSigmaPoints(double delta_t);
+  void PredictMeanAndCovariance();
+
+  void TransformPrediction();
+  void UpdatePrediction(MeasurementPackage meas_package);
 };
 
 #endif /* UKF_H */
